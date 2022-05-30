@@ -25,7 +25,7 @@ print(f"{red.user.me()} has logged in sucessfully ")
 
 def check_day(today):
     """Checks if is the correct day"""
-    if today == "Saturday":
+    if today == "Sunday" or"Monday" :
         return True
     else:
         return False
@@ -34,7 +34,7 @@ def check_flairs():
     sub =  red.subreddit(config['msc']['subreddit'])
     for post in sub.stream.submissions():
         flair,pid  = post.link_flair_text, post.id
-        if str(flair) == "Suspect SOS":
+        if str(flair) == config["flair"]:
             subm =red.submission(id=pid)
             subm.mod.remove()
         day = date.weekday(date.today())
@@ -47,7 +47,7 @@ def unrestriced_mehtod():
     """The Main"""
     while True:
         day = date.weekday(date.today())
-        if check_day(str(Days[day])) is False:
+        if check_day(str(Days[day])) is True:
             check_flairs()
         else:
             sleep(3600)
